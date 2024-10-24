@@ -35,11 +35,11 @@ const styles = {
     marginBottom: '20px', // Margen inferior para separar el texto de los botones
     fontSize: '24px', // Tamaño de la fuente
     fontWeight: 'bold', // Texto en negrita
-    color: 'black', // Color del texto
+    color: '#F5F5F5', // Color del texto
   },
   button: {
-    backgroundColor: 'white', // Color de fondo del botón
-    color: 'black', // Color del texto del botón
+    backgroundColor: '#F5F5F5', // Color de fondo del botón
+    color: '#8DA691', // Color del texto del botón
     padding: '15px 30px', // Espaciado interno del botón
     margin: '10px 0', // Margen superior e inferior
     border: 'none', // Sin borde
