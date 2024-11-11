@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import RecyclingPopup from '../components/reciclaje_popup';
+import RecyclingPopup from '../components/basuraTrabajador_popup';
 import { Link } from 'react-router-dom';
 
-import basuraLibre from '../assets/basura_libre.png';
 import basuraLlena from '../assets/basura_llena.png';
 
+// Icono personalizado para los marcadores de basura
 const RetirobasuraIcon = new L.Icon({
-    iconUrl: basuraLibre,
-    iconSize: [25, 25],
-    iconAnchor: [13, 13],
-    popupAnchor: [0, -40]
-});
-
-const NodisponibleaunIcon = new L.Icon({
     iconUrl: basuraLlena,
     iconSize: [25, 25],
     iconAnchor: [13, 13],
@@ -23,7 +16,8 @@ const NodisponibleaunIcon = new L.Icon({
 });
 
 const TrabajadorPage = () => {
-    const recyclePoints = [
+    // Estado inicial para los puntos de recolección de basura
+    const [recyclePoints, setRecyclePoints] = useState([
         { id: 1, lat: -33.0441, lng: -71.6183, type: 'Retiro basura', direccion: 'Calle San Martín 130' },
         { id: 3, lat: -33.0467, lng: -71.6295, type: 'Retiro basura', direccion: 'Calle Del Parque 600' },
         { id: 5, lat: -33.0475, lng: -71.6195, type: 'Retiro basura', direccion: 'Calle Lota 190' },
@@ -37,17 +31,19 @@ const TrabajadorPage = () => {
         { id: 21, lat: -33.0305, lng: -71.6387, type: 'Retiro basura', direccion: 'Calle Argentina 1235' },
         { id: 23, lat: -33.0345, lng: -71.5939, type: 'Retiro basura', direccion: 'Calle Independencia 850' },
         { id: 25, lat: -33.0281, lng: -71.5220, type: 'Retiro basura', direccion: 'Calle Francia 2300' },
-    ];
+    ]);
 
-
+    // Función para eliminar un punto de la lista
+    const removePoint = (id) => {
+        setRecyclePoints((prevPoints) => prevPoints.filter(point => point.id !== id));
+    };
 
     return (
         <div style={styles.container}>
-            {/* Bouton Home */}
             <Link to="/" style={styles.homeButton}>
-                Volver Home
+                Volver al inicio
             </Link>
-            <h2 style={styles.title}>Encuentre su punto mas cercano para recoger basura </h2>
+            <h2 style={styles.title}>Encuentre el punto más cercano para recoger basura</h2>
             <MapContainer
                 center={[-33.0456, -71.6199]}
                 zoom={13}
@@ -61,10 +57,13 @@ const TrabajadorPage = () => {
                     <Marker
                         key={point.id}
                         position={[point.lat, point.lng]}
-                        icon={point.type === 'Retiro basura' ? RetirobasuraIcon : NodisponibleaunIcon}
+                        icon={RetirobasuraIcon}
                     >
-                        {/* Using component reciclaje_popup */}
-                        <RecyclingPopup type={point.type} direccion={point.direccion} />
+                        <RecyclingPopup 
+                            type={point.type} 
+                            direccion={point.direccion} 
+                            onClear={() => removePoint(point.id)} 
+                        />
                     </Marker>
                 ))}
             </MapContainer>
@@ -72,6 +71,7 @@ const TrabajadorPage = () => {
     );
 };
 
+// Estilos
 const styles = {
     container: {
         display: 'flex',
@@ -93,19 +93,15 @@ const styles = {
         border: '1px solid #ccc',
     },
     homeButton: {
-        position: 'absolute', // Positionnement absolu
-        top: '20px', // Distance du haut
-        right: '20px', // Distance de la droite
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
         padding: '10px 20px',
         borderRadius: '5px',
         backgroundColor: '#F5F5F5',
         color: '#8DA691',
         textDecoration: 'none',
         fontWeight: 'bold',
-        transition: 'background-color 0.3s',
-    },
-    homeButtonHover: {
-        backgroundColor: '#7a9c79',
     }
 };
 
