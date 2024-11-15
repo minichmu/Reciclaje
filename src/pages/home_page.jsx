@@ -10,12 +10,12 @@ export const HomePage = () => {
       
       {/* Enlace al componente "trabajador" */}
       <Link to="/trabajador" style={styles.link}>
-        <button style={styles.button}>TRABAJADOR</button>
+        <button style={styles.button}>BASUREROS / BASURERARS</button>
       </Link>
 
       {/* Enlace al componente "reciclador" */}
       <Link to="/reciclador" style={styles.link}>
-        <button style={styles.button}>RECICLADOR</button>
+        <button style={styles.button}>CIUDADANOS / CUIDADANAS</button>
       </Link>
     </div>
   );

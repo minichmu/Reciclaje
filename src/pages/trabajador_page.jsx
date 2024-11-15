@@ -41,7 +41,7 @@ const TrabajadorPage = () => {
     return (
         <div style={styles.container}>
             <Link to="/" style={styles.homeButton}>
-                Volver al inicio
+                Volver Home
             </Link>
             <h2 style={styles.title}>Encuentre el punto más cercano para recoger basura</h2>
             <MapContainer
