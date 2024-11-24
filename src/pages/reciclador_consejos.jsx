@@ -3,6 +3,8 @@ import Navbar from '../components/navBar_reciclador';
 import ConsejosPopup from '../components/consejos_popup';
 import { Link } from 'react-router-dom';
 
+import reciImage from '../assets/reciclage.png';
+
 const RecicladorConsejos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -16,6 +18,7 @@ const RecicladorConsejos = () => {
       Asegúrate de que los envases estén limpios y secos antes de depositarlos en el contenedor correspondiente. 
       Además, informa a todos los miembros de tu familia sobre la importancia de esta práctica. 
       Recuerda que una separación adecuada puede aumentar la eficiencia del reciclaje y contribuir a un planeta más limpio.`,
+      imageUrl: reciImage,
     },
     {
       id: 2,
@@ -28,6 +31,7 @@ const RecicladorConsejos = () => {
       no son aceptados en muchos centros de reciclaje. 
       Informa a tus amigos y familiares sobre los materiales que se pueden reciclar 
       para aumentar la tasa de reciclaje en tu comunidad.`,
+      imageUrl: reciImage,
     },
     {
       id: 3,
@@ -39,6 +43,7 @@ const RecicladorConsejos = () => {
       serían desechados. Por ejemplo, los frascos de vidrio pueden convertirse en 
       recipientes de almacenamiento. Finalmente, el reciclaje es la última opción; 
       asegúrate de que los materiales sean reciclables y de seguir las pautas de reciclaje en tu área.`,
+      imageUrl: reciImage,
     },
     {
       id: 4,
@@ -50,6 +55,7 @@ const RecicladorConsejos = () => {
       Existen varias formas de compostar, desde pilas abiertas hasta sistemas de compostaje 
       en recipientes cerrados. El compost resultante es un excelente fertilizante 
       natural para tus plantas y jardines, ayudando a mejorar la salud del suelo.`,
+      imageUrl: reciImage,
     },
     {
       id: 5,
@@ -63,6 +69,7 @@ const RecicladorConsejos = () => {
       Infórmate sobre las reglas locales y verifica qué se acepta en tu área. 
       Un reciclaje efectivo no solo reduce la cantidad de residuos que terminan en los vertederos, 
       sino que también ayuda a conservar recursos naturales y a reducir la contaminación.`,
+      imageUrl: reciImage,
     },
   ];
 
@@ -99,14 +106,21 @@ const RecicladorConsejos = () => {
       <div style={styles.consejosList}>
         {filteredConsejos.map((consejo) => (
           <div key={consejo.id} style={styles.consejoCard}>
-            <h3 style={styles.consejoTitle}>{consejo.title}</h3>
-            <p style={styles.consejoDescription}>{consejo.description}</p>
-            <button 
-              style={styles.consejoLink} 
-              onClick={() => handleLeerMasClick(consejo)}
-            >
-              Leer más
-            </button>
+            <img 
+              src={consejo.imageUrl} 
+              alt={consejo.title} 
+              style={styles.consejoImage} 
+            />
+            <div style={styles.consejoContent}>
+              <h3 style={styles.consejoTitle}>{consejo.title}</h3>
+              <p style={styles.consejoDescription}>{consejo.description}</p>
+              <button 
+                style={styles.consejoLink} 
+                onClick={() => handleLeerMasClick(consejo)}
+              >
+                Leer más
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -152,17 +166,26 @@ const styles = {
     },
   },
   consejosList: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
     gap: '20px',
     width: '80%',
-    paddingBottom: '100px', 
   },
   consejoCard: {
     backgroundColor: 'white',
-    padding: '15px',
     borderRadius: '8px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  consejoImage: {
+    width: '100%',
+    height: '150px',
+    objectFit: 'cover',
+  },
+  consejoContent: {
+    padding: '15px',
   },
   consejoTitle: {
     fontSize: '18px',
@@ -171,13 +194,9 @@ const styles = {
     color: '#333',
   },
   consejoDescription: {
-    display: '-webkit-box',
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-    WebkitLineClamp: 2, // Limitar a 2 líneas
     fontSize: '14px',
-    marginBottom: '10px',
     color: '#666',
+    marginBottom: '10px',
   },
   consejoLink: {
     fontSize: '14px',
@@ -189,9 +208,9 @@ const styles = {
     cursor: 'pointer',
   },
   homeButton: {
-    position: 'absolute', // Positionnement absolu
-    top: '20px', // Distance du haut
-    right: '20px', // Distance de la droite
+    position: 'absolute',
+    top: '20px',
+    right: '20px',
     padding: '10px 20px',
     borderRadius: '5px',
     backgroundColor: '#8DA691',
@@ -200,9 +219,6 @@ const styles = {
     fontWeight: 'bold',
     transition: 'background-color 0.3s',
   },
-  homeButtonHover: {
-    backgroundColor: '#7a9c79',
-  }
 };
 
 export default RecicladorConsejos;
