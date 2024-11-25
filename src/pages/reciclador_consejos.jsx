@@ -124,6 +124,7 @@ const RecicladorConsejos = () => {
           </div>
         ))}
       </div>
+      
 
       {/* Popup para mostrar los consejos */}
       {selectedConsejo && (
@@ -133,6 +134,7 @@ const RecicladorConsejos = () => {
           onClose={handleClosePopup}
         />
       )}
+      
     </div>
   );
 };
@@ -145,6 +147,7 @@ const styles = {
     padding: '20px',
     backgroundColor: '#F5F5F5',
     minHeight: '100vh',
+    paddingBottom: '90px',
   },
   title: {
     fontSize: '40px',
@@ -197,6 +200,11 @@ const styles = {
     fontSize: '14px',
     color: '#666',
     marginBottom: '10px',
+    display: '-webkit-box',
+    WebkitLineClamp: 5, // Limite à 5 lignes
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   consejoLink: {
     fontSize: '14px',
